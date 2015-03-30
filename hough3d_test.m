@@ -1,4 +1,4 @@
-N = 30;    % number of points per plane
+N = 60;    % number of points per plane
 a = 50;    % min value of co-ordinate
 b = -50;   % max value of co-ordinate
 c = 10;     % value of the constant co-ordinate
@@ -9,18 +9,18 @@ RandStream.setGlobalStream(s)
 points = [];
 
 % y-z plane
-x = (ones(1, N) * c).';
-y = a + (b-a).*rand(N,1);
-z = a + (b-a).*rand(N,1);    
-simplePlanePlot([x y z], 'b');
-points = [points; x y z];
+% x = (ones(1, N) * c).';
+% y = a + (b-a).*rand(N,1);
+% z = a + (b-a).*rand(N,1);    
+% simplePlanePlot([x y z], 'b');
+% points = [points; x y z];
 
 % x-z plane
-x = a + (b-a).*rand(N,1);
-y = (ones(1, N) * c).';
-z = a + (b-a).*rand(N,1);
-simplePlanePlot([x y z], 'b');
-points = [points; [x y z]];
+% x = a + (b-a).*rand(N,1);
+% y = (ones(1, N) * c).';
+% z = a + (b-a).*rand(N,1);
+% simplePlanePlot([x y z], 'b');
+% points = [points; [x y z]];
 
 % x-y plane
 % x = a + (b-a).*rand(N,1);
@@ -49,6 +49,12 @@ points = [points; [x y z]];
 % z = -(2*x + 3*y)/4 + 1;
 % simplePlanePlot([x y z], 'b');
 % points = [points; [x y z]];
+
+x = a + (b-a).*rand(N,1);
+y = a + (b-a).*rand(N,1);
+z = -(2*x + 3*y)/4 + 1;
+simplePlanePlot([x y z], 'b');
+points = [points; [x y z]];
 
 % plane for 10*x + 30*y + 13*z = 33
 % x = a + (b-a).*rand(N,1);

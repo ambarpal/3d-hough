@@ -1,10 +1,12 @@
-function compareAlgo( minVal, maxVal, numPoints, testList )
+function compareAlgo( minVal, maxVal, numPoints, testList, fileId)
 %COMPAREPLANES Compares SSC and Hough for the given testList
 % testList specifies the testNumbers that should be taken to generate
 % points
 % minVal specifies the minimum value of the coordinate
 % maxVal specifies the maximum value of the coordinate
 % numPoints specifies the number of points to be generated
+% fileId is appended to the saved files to give unique names to the fig
+% files saved in different runs of compareAlgo
 
 s = RandStream('mcg16807', 'Seed', 0);
 RandStream.setGlobalStream(s)
@@ -12,6 +14,8 @@ x = minVal + (maxVal-minVal).*rand(numPoints,1);
 y = minVal + (maxVal-minVal).*rand(numPoints,1); 
 points = [];
 
+hold on
+figure('Name','SSC Planes');
 if ismember(1, testList(:)) == 1
     disp('x + y + z = 1');
     z = 1 - ( x + y );
@@ -28,10 +32,21 @@ end
 points = points + randn(size(points));
 plot3(0, 0, 0, 'MarkerSize', 11, 'Marker', 'o', 'MarkerEdgeColor', 'k', 'MarkerFaceColor', 'k');
 scatter3(points(:,1), points(:,2), points(:,3), 'g', 'filled');
-hold off;
 
+% Find the groups that SSC returns and plot planes corresponding to each
+% plane
 grps = SSC(points.');
+for i = 1:max(grps(:,1))
+    cur = [];
+    for j = 1:size(points,1)
+        if grps(j,1) == i
+            cur = [cur; points(j,:)];
+        end
+    end
+    simplePlanePlot(cur, 'r');
+end
 scatter3(points(:,1), points(:,2), points(:,3),20.*ones(1,size(points,1)),grps(:,1),'filled');
 % hough3d2(points, length(points)/2, 5, 5, 0.1);
+hold off
 end
 

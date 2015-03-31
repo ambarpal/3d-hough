@@ -31,7 +31,7 @@ function Grps = SSC(X)
 
 % clc, clear all, close all
 D = 3; %Dimension of ambient space
-n = 3; %Number of subspaces
+n = 2; %Number of subspaces
 d1 = 2; d2 = 2; %d1 and d2: dimension of subspace 1 and 2
 %N1 = 1000; N2 = 1000; %N1 and N2: number of points in subspace 1 and 2
 %X1 = randn(D,d1) * randn(d1,N1); %Generating N1 points in a d1 dim. subspace
